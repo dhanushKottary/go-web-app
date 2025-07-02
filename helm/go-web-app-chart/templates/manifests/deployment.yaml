@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-web-app
+  labels:
+    app: go-web-app
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: go-web-app
+      labels:
+        app: go-web-app
+    spec:
+      containers:
+        - name: go-web-app
+          image: dhaprako/goapp:{{ .Values.image.tag }}  #dhaprako/goapp:v1
+          ports:
+            - containerPort: 9001
+              name: goapp
+  selector:
+    matchLabels:
+      app: go-web-app            
